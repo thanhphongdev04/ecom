@@ -1,9 +1,7 @@
 <?php session_start();
-include("conn/connect.php"); ?>
+include("../conn/connect.php"); ?>
 
 <?php
-include "template/header.php";
-include "template/nav.php";
 
 if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
     header("Location:login.php");
@@ -33,12 +31,12 @@ $user_id = $_SESSION['user-id'];
                     </thead>
                     <tbody>
                         <?php
-                        $price_total = 0;
-                        $quantity_total = 0;
                         $sql = 'SELECT products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
                         $result = mysqli_query($conn, $sql);
-
                         while ($row = mysqli_fetch_array($result)) {
+                            echo "<pre>";
+                            print_r($row);
+                            echo "</pre>";
                             ?>
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
@@ -48,34 +46,19 @@ $user_id = $_SESSION['user-id'];
                                 <td><a href=""><button class="btn btn-danger">Remove</button></a></td>
                             </tr>
                             <?php
-                            $quantity_total += $row['quantity'];
-                            $price_total += $row['price'] * $row['quantity'];
                         }
                         ?>
+                        <tr>
+                            <th scope="row">Total</th>
+                            <td></td>
+                            <td></td>
+                            <td><button class="btn btn-warning text-dark">Checkout</button></td>
+                        </tr>
                     </tbody>
                 </table>
 
-                <div class="view-cart-summary position-sticky">
-                    <table>
-                        <tr class="text-center">
-                            <th colspan="2">Order summary:</th>
-                        </tr>
-                        <tr>
-                            <td class="px-3">Total quantity: </td>
-                            <?php
-                            echo '<td>' . $quantity_total . '</td>';
-                            ?>
-                        </tr>
-                        <tr>
-                            <td class="px-3">Total price: </td>
-                            <?php
-                            echo '<td class="price"><b>' . number_format($price_total, 0, '', '.') . ' VND</b></td>';
-                            ?>
-                        </tr>
-                        <tr class="text-center border-top mx-3">
-                            <td colspan="2"><button class="btn btn-warning px-5">Checkout</button></td>
-                        </tr>
-                    </table>
+                <div class="view-cart-total position-sticky">
+
                 </div>
             </div>
         </div>
@@ -83,5 +66,4 @@ $user_id = $_SESSION['user-id'];
     </div>
 </div>
 <?php
-include "template/footer.php";
 ?>

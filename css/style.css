@@ -51,12 +51,27 @@
     width: 100%;
 }
 
-.view-cart-total {
+.view-cart-summary {
     top: 56px;
     width: 30%;
     margin-left: 15px;
     height: 200px;
+    border: 2px solid var(--warning);
+    border-radius: 5px;
+}
+
+.view-cart-summary>table {
+    width: 100%;
+    height: 100%;
+}
+
+.view-cart-summary>table>td {
+    margin-left: 20px;
     background-color: red;
+}
+
+tr>.hr {
+    border-top: 1px solid lightgray;
 }
 
 

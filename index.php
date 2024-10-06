@@ -10,10 +10,9 @@ include("template/nav.php");
         <div class="col-1"></div>
         <div class="col-10">
             <?php
-            $sql = "Select * from products";
+            $sql = "SELECT * from products";
             $result = mysqli_query($conn, $sql);
             $count = 0;
-            /* edit here */
             while ($row = mysqli_fetch_array($result)) {
                 if ($count == 0) {
                     echo '<div class="row d-flex justify-content-around">'; // Mở hàng mới
