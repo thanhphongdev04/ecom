@@ -27,7 +27,8 @@
 
 .product-container:hover {
     transform: scale(0.99);
-    transition: .5s;
+    transition: .3s;
+    box-shadow: none;
 }
 
 .product-container>.thumbnail>img {
@@ -39,6 +40,13 @@
 
 .product-container>.info {
     margin-left: 15px;
+}
+
+.product-container>.info>.title:hover {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--warning);
+    transition: .5s;
 }
 
 .price {

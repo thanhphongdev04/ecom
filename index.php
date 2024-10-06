@@ -6,7 +6,7 @@ include("template/nav.php");
 ?>
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row bg-light">
         <div class="col-1"></div>
         <div class="col-10">
             <?php
@@ -25,8 +25,9 @@ include("template/nav.php");
                     <div class="info">
                         <h5 class="title"><?php echo $row['title'] ?></h5>
                         <p class=""><?php echo $row['description'] ?></p>
-                        <p class="price"><b>Price: <?php echo $row['price'] ?> VND</b></p>
-                        <a href="addToCart.php?id=<?php echo $row['id'] ?>"><button class="btn btn-warning">Add to
+                        <p class="price"><b>Price: <?php echo number_format($row['price']) ?> VND</b></p>
+                        <a href="addToCart.php?id=<?php echo $row['id'] ?>"><button class="btn btn-warning"><i
+                                    class="fa-solid fa-cart-plus fa-lg"></i> Add to
                                 cart</button></a>
                     </div>
                 </div>

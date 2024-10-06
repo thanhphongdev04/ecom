@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/navbar.css">
 
     <!-- icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <!-- Boostrap -->
@@ -19,6 +19,6 @@
 </head>
 
 <header class="d-flex bg-dark align-items-center mb-3 py-3 rounded mx-5">
-    <a href="index.php"><img src="./images/logo.jpg"></a>
+    <a href="index.php"><img src="./images/bmazon-logo.jpg"></a>
     <h1 class="text-warning highlighted-text-shadow">bmazon</h1>
 </header>

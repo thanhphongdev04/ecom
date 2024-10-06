@@ -45,7 +45,7 @@ $user_id = $_SESSION['user-id'];
                                 <td><?php echo $row['title'] ?></td>
                                 <td><?php echo $row['price'] ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
-                                <td><a href=""><button class="btn btn-danger">Remove</button></a></td>
+                                <td><a href="removeFromCart.php"><button class="btn btn-danger">Remove</button></a></td>
                             </tr>
                             <?php
                             $quantity_total += $row['quantity'];
