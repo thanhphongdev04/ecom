@@ -21,6 +21,7 @@ include('template/header.php');
 include('template/nav.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $flag = false;
     $u = $_POST['username'];
     $p = password_hash($_POST['password'], PASSWORD_DEFAULT); // Mã hóa mật khẩu
     $e = $_POST['email'];
@@ -38,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sss", $u, $p, $e);
         if ($stmt->execute()) {
             $mess = "Đăng ký thành công";
+            $flag = true;
         } else {
             $mess = "Đăng ký thất bại";
         }
@@ -47,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<div class="container">
-    <div style="width: 50%; margin: 0 auto;">
+<div class="container d-flex my-3">
+    <div class="w-50 p-5 border border-dark">
         <h1 class="text-warning text-center">Đăng ký</h1>
         <form action="" method="POST" onsubmit="return validatePassword()">
             <div class="form-group">
@@ -69,20 +71,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="repassword">Nhập lại mật khẩu:</label>
                 <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="repassword"
                     id="repassword" required>
-                <span id="error-message" class="error" style="color: red;"></span><br><br>
+                <span id="error-message" class="error" style="color: red;"></span>
 
                 <?php if (isset($mess) && $mess != ""): ?>
-                    <div class="alert alert-danger">
+                    <div class="alert alert-<?php echo $flag ? "success" : "danger"; ?> mt-2">
                         <strong>Thông báo</strong> <?php echo $mess; ?>.
                     </div>
                 <?php endif; ?>
             </div>
 
-            <div style="margin: 0 auto;">
+            <div class="text-center">
                 <button type="submit" class="btn btn-warning">Đăng ký</button>
-                <a href="login.php" class="btn btn-outline-warning">Đăng nhập</a>
             </div>
         </form>
+    </div>
+    <div class="w-50 d-flex flex-column align-items-center justify-content-center bg-dark text-light rounded-end-2">
+        <img class="icon" src="images/bmazon-logo.jpg">
+        <h4>Chào mừng bạn đến đăng ký</h4>
+        <p>Đã có tài khoản?</p>
+        <a href="login.php" class="btn btn-outline-warning">Đăng nhập</a>
     </div>
 </div>
 

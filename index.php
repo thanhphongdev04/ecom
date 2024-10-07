@@ -54,8 +54,6 @@ include("template/nav.php");
                 }
             }
             ?>
-
-
         </div>
         <div class="col-1"></div>
     </div>

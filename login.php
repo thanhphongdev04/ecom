@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <div class="container">
-        <div style="width: 50%; margin: 0 auto;">
-            <h1 class="text-center text-warning">Đăng nhập</h1>
+    <div class="container d-flex my-3">
+        <div class="w-50 p-5 border border-warning">
+            <h2 class="text-warning mb-3">Đăng nhập</h2>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger">
                     <strong>Thông báo:</strong> <?php echo $error; ?>
@@ -61,12 +61,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password"
                         id="password" required>
                 </div>
-                <div>
+                <div class="text-center">
                     <button type="submit" class="btn btn-warning">Đăng nhập</button>
-                    <a href="Register.php" class="btn btn-outline-warning">Đăng ký</a>
                 </div>
             </form>
         </div>
+
+        <div class="w-50 d-flex flex-column align-items-center justify-content-center bg-warning rounded-end-2">
+            <img class="icon" src="images/bmazon-logo.jpg">
+            <h4>Chào mừng bạn đến đăng nhập</h4>
+            <p>Chưa có tài khoản?</p>
+            <a href="Register.php" class="btn btn-outline-dark">Đăng kí</a>
+        </div>
+
     </div>
 
     <?php include('template/footer.php'); ?>
