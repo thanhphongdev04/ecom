@@ -8,13 +8,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php"><i class="fa-solid fa-house"></i> Home</i></a>
+                <a class="nav-link" href="index.php"><i class="fa-solid fa-house"></i> Trang chủ</i></a>
             </li>
 
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle ml-2" href="#" id="navbardrop" data-toggle="dropdown">
-                    <i class="fa-solid fa-layer-group"></i> Category
+                    <i class="fa-solid fa-layer-group"></i> Loại sản phẩm
                 </a>
                 <div class="dropdown-menu">
                     <?php
@@ -30,7 +30,7 @@
             </li>
 
             <li class="nav-item ml-2">
-                <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> View cart</a>
+                <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
             </li>
         </ul>
         <ul class="navbar-nav">
@@ -41,17 +41,17 @@
                     <a class="nav-link" href=""><i class="fa-solid fa-user mr-2"></i><?php echo $_SESSION['user'] ?></a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a class="nav-link" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                    <a class="nav-link" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
                 </li>
                 <?php
             } else {
                 ?>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="register.php"><i class="fa-solid fa-user mr-1"></i> Sign up</a>
+                    <a class="nav-link" href="register.php"><i class="fa-solid fa-user mr-1"></i> Đăng ký</a>
                 </li>
 
                 <li class="nav-item mr-2">
-                    <a class="nav-link" href="login.php"><i class="fa-solid fa-right-to-bracket mr-1"></i> Log in</a>
+                    <a class="nav-link" href="login.php"><i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập</a>
                 </li>
                 <?php
             } ?>
