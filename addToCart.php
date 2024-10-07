@@ -7,10 +7,16 @@ if (!isset($_SESSION["user"]) || $_SESSION["user"] == "") {
     return;
 }
 
+if (!isset($_GET['quantity']) || $_GET['quantity'] <= 0) {
+    header('location:index.php?status=failed');
+    return;
+}
+
 if (isset($_GET["id"]) && !empty($_GET["id"])) {
     $product_id = $_GET['id'];
     $username = $_SESSION['user'];
     $user_id = $_SESSION['user-id'];
+    $quantity = $_GET['quantity'];
 
     //Tìm số lượng sản phẩm của user 
     $stmt = $conn->prepare("SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?");
@@ -19,7 +25,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        $quantity = $row['quantity'] + 1;
+        $quantity = $row['quantity'] + $quantity;
 
         $stmt = $conn->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?");
         $stmt->bind_param("iii", $quantity, $user_id, $product_id);

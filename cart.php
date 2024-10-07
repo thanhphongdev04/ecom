@@ -43,7 +43,7 @@ $user_id = $_SESSION['user-id'];
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
                                 <td><?php echo $row['title'] ?></td>
-                                <td><?php echo $row['price'] ?></td>
+                                <td class="price"><?php echo number_format($row['price'], 0, '', '.') ?> VND</td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td><a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>"><button
                                             class="btn btn-danger">Remove</button></a></td>

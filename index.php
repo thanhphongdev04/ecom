@@ -22,14 +22,28 @@ include("template/nav.php");
                     <div class="thumbnail">
                         <img src="images/<?php echo $row['image'] ?>" alt="Lỗi ảnh...">
                     </div>
-                    <div class="info">
+                    <form class="info" action="addToCart.php" method="GET">
+                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                         <h5 class="title"><?php echo $row['title'] ?></h5>
                         <p class=""><?php echo $row['description'] ?></p>
                         <p class="price"><b>Price: <?php echo number_format($row['price']) ?> VND</b></p>
-                        <a href="addToCart.php?id=<?php echo $row['id'] ?>"><button class="btn btn-warning"><i
-                                    class="fa-solid fa-cart-plus fa-lg"></i> Add to
-                                cart</button></a>
-                    </div>
+                        <select class="custom-select w-25 mr-3" name="quantity">
+                            <option selected value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <button type="submit" class="btn btn-warning"><i class="fa-solid fa-cart-plus fa-lg"></i>
+                            Add to cart</button>
+                    </form>
                 </div>
                 <?php
                 $count++;

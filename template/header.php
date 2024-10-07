@@ -1,6 +1,6 @@
 <head>
     <title>bmazon</title>
-    <link rel="icon" href="images/logo.jpg">
+    <link rel="icon" href="images/bmazon-logo.jpg">
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/style.css">

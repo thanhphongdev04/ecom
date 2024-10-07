@@ -40,6 +40,8 @@
 
 .product-container>.info {
     margin-left: 15px;
+    flex-grow: 1;
+    /* Chiếm hết phần còn lại của chiều ngang */
 }
 
 .product-container>.info>.title:hover {
