@@ -4,12 +4,12 @@ include 'conn/connect.php';
 //Nếu chưa đăng nhập
 if (!isset($_SESSION["user"]) || $_SESSION["user"] == "") {
     header("Location:login.php");
-    return;
+    exit();
 }
 
 if (!isset($_GET['quantity']) || $_GET['quantity'] <= 0) {
     header('location:index.php?status=failed');
-    return;
+    exit();
 }
 
 if (isset($_GET["id"]) && !empty($_GET["id"])) {

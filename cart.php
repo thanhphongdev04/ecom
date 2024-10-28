@@ -1,13 +1,11 @@
 <?php session_start();
-include("conn/connect.php"); ?>
-
-<?php
+include "conn/connect.php";
 include "template/header.php";
 include "template/nav.php";
 
 if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
     header("Location:login.php");
-    return;
+    exit();
 }
 
 $user_id = $_SESSION['user-id'];

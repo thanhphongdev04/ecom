@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('conn/connect.php');
-include('template/header.php');
-include('template/nav.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -20,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user'] = $user['username'];
             $_SESSION['user-id'] = $user['id'];
             header("Location: index.php");
-            //exit();
+            exit();
         } else {
             $error = "Mật khẩu không đúng.";
         }
@@ -30,14 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
 }
+
+include('template/header.php');
+include('template/nav.php');
+
 ?>
 
-<!DOCTYPE html>
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
 </head>
 

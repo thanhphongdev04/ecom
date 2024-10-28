@@ -1,24 +1,6 @@
-<script>
-    function validatePassword() {
-        var password = document.getElementById("password").value;
-        var repassword = document.getElementById("repassword").value;
-        var message = document.getElementById("error-message");
-
-        if (password === repassword) {
-            message.textContent = ""; // Xóa thông báo lỗi
-            return true; // Cho phép gửi biểu mẫu
-        } else {
-            message.textContent = "Mật khẩu không khớp!"; // Hiển thị thông báo lỗi
-            return false; // Ngăn gửi biểu mẫu
-        }
-    }
-</script>
-
 <?php
 session_start();
 include('conn/connect.php');
-include('template/header.php');
-include('template/nav.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $flag = false;
@@ -47,7 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
 }
+
+
+include('template/header.php');
+include('template/nav.php');
 ?>
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var repassword = document.getElementById("repassword").value;
+        var message = document.getElementById("error-message");
+
+        if (password === repassword) {
+            message.textContent = ""; // Xóa thông báo lỗi
+            return true; // Cho phép gửi biểu mẫu
+        } else {
+            message.textContent = "Mật khẩu không khớp!"; // Hiển thị thông báo lỗi
+            return false; // Ngăn gửi biểu mẫu
+        }
+    }
+</script>
+
 
 <div class="container d-flex my-3">
     <div class="w-50 p-5 border border-dark">
