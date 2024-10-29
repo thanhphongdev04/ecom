@@ -33,8 +33,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     } else {
         //Nếu không có sản phẩm nào
         $stmt = $conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)");
-        $quantiy_init = 1;
-        $stmt->bind_param("iii", $user_id, $product_id, $quantiy_init);
+        $stmt->bind_param("iii", $user_id, $product_id, $quantity);
         $stmt->execute();
     }
     header('location: index.php?status=success');
