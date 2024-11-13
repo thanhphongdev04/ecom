@@ -34,9 +34,6 @@ $user_id = $_SESSION['user-id'];
                         $sql = 'SELECT products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_array($result)) {
-                            echo "<pre>";
-                            print_r($row);
-                            echo "</pre>";
                             ?>
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>

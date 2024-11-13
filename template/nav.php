@@ -38,7 +38,8 @@
             if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
                 ?>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href=""><i class="fa-solid fa-user mr-2"></i><?php echo $_SESSION['user'] ?></a>
+                    <a class="nav-link" href="profile.php"><i
+                            class="fa-solid fa-user mr-2"></i><?php echo $_SESSION['user'] ?></a>
                 </li>
                 <li class="nav-item mr-2">
                     <a class="nav-link" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
