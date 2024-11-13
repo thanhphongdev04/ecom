@@ -6,7 +6,6 @@ if (isset($_SESSION['user']) && isset($_SESSION['user-id'])) {
     $sql = "SELECT * FROM users WHERE id = " . $_SESSION['user-id'];
     $res = mysqli_query($conn, $sql);
     $user = $res->fetch_assoc();
-
 } else {
     header('Location: login.php');
     exit();
@@ -16,18 +15,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
+    $flag = false;
+    $id = $user['id'];
 
-    if (password_verify($old_password, $user['password'])) {
+    $sql = "SELECT * FROM users WHERE id != $id AND email = '$email'";
+    $res = mysqli_query($conn, $sql);
+    if ($res->num_rows > 0) {
+        $mess = "Email đã tồn tại!";
+    } else if (password_verify($old_password, $user['password'])) {
         if (!empty($new_password)) {
             $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         } else {
             $new_hashed_password = $user['password'];
         }
 
-        $sql = "UPDATE users SET email = '$email', password = '$new_hashed_password' WHERE id = " . $user['id'];
+        $sql = "UPDATE users SET email = '$email', password = '$new_hashed_password' WHERE id = $id";
         $result = mysqli_query($conn, $sql);
         if ($result = mysqli_query($conn, $sql)) {
             $mess = "Cập nhật thành công";
+            $flag = true;
         } else {
             $mess = "Cập nhật thất bại";
         }
@@ -42,9 +48,10 @@ include('template/nav.php');
 ?>
 
 
-<div class="container d-flex my-3">
-    <div class="w-75 p-5 border border-dark">
-        <h1 class="text-warning text-center">Chỉnh sửa thông tin</h1>
+<div class="container d-flex justify-content-center my-3">
+    <div class="w-75 p-5 border border-dark rounded">
+        <h1 class="text-warning text-center"><i class="fa-solid fa-pen text-warning"></i><span class="mx-2">Chỉnh sửa
+                thông tin</span></h1>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Tên người dùng:</label>
@@ -64,7 +71,7 @@ include('template/nav.php');
             <div class="form-group">
                 <label for="repassword">Mật khẩu mới:</label>
                 <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="new_password"
-                    id="new_password" required>
+                    id="new_password">
                 <span id="error-message" class="error" style="color: red;"></span>
 
                 <?php if (isset($mess) && $mess != ""): ?>
@@ -80,12 +87,6 @@ include('template/nav.php');
             </div>
         </form>
     </div>
-    <!--  <div class="w-50 d-flex flex-column align-items-center justify-content-center bg-dark text-light rounded-end-2">
-        <img class="icon" src="images/bmazon-logo.jpg">
-        <h4>Chào mừng bạn đến đăng ký</h4>
-        <p>Đã có tài khoản?</p>
-        <a href="login.php" class="btn btn-outline-warning">Đăng nhập</a>
-    </div> -->
 </div>
 
 <?php

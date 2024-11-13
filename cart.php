@@ -23,6 +23,7 @@ $user_id = $_SESSION['user-id'];
                     <thead class="bg-warning">
                         <tr>
                             <th scope="col">S.Number</th>
+                            <th scope="col">Check</th>
                             <th scope="col">Item name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
@@ -40,6 +41,7 @@ $user_id = $_SESSION['user-id'];
                             ?>
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
+                                <td class="text-center"><input class="form-check-input" type="checkbox"></td>
                                 <td><?php echo $row['title'] ?></td>
                                 <td class="price"><?php echo number_format($row['price'], 0, '', '.') ?> VND</td>
                                 <td><?php echo $row['quantity'] ?></td>
