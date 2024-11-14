@@ -26,7 +26,7 @@ include("template/nav.php");
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                         <h5 class="title"><?php echo $row['title'] ?></h5>
                         <p class=""><?php echo $row['description'] ?></p>
-                        <p class="price"><b><?php echo number_format($row['price']) ?> &#8363;</b></p>
+                        <p class="price"><b>&#36;<?php echo number_format($row['price']) ?></b></p>
                         <select class="custom-select w-25 mr-3" name="quantity">
                             <option selected value="1">1</option>
                             <option value="2">2</option>

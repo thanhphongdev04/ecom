@@ -43,7 +43,7 @@ $user_id = $_SESSION['user-id'];
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
                                 <td class="text-center"><input class="form-check-input" type="checkbox"></td>
                                 <td><?php echo $row['title'] ?></td>
-                                <td class="price"><?php echo number_format($row['price'], 0, '', '.') ?> VND</td>
+                                <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td><a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>"><button
                                             class="btn btn-danger">Remove</button></a></td>
@@ -70,7 +70,7 @@ $user_id = $_SESSION['user-id'];
                         <tr>
                             <td class="px-3">Total price: </td>
                             <?php
-                            echo '<td class="price"><b>' . number_format($price_total, 0, '', '.') . ' VND</b></td>';
+                            echo '<td class="price"><b>&#36;' . number_format($price_total, 0, '', '.') . '</b></td>';
                             ?>
                         </tr>
                         <tr class="text-center border-top mx-3">
