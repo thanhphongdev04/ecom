@@ -1,12 +1,13 @@
 <?php session_start();
 include "conn/connect.php";
-include "template/header.php";
-include "template/nav.php";
 
 if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
     header("Location:login.php");
     exit();
 }
+
+include "template/header.php";
+include "template/nav.php";
 
 $user_id = $_SESSION['user-id'];
 
@@ -16,7 +17,7 @@ $user_id = $_SESSION['user-id'];
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <h1>View Cart</h1>
+            <h1>Giỏ hàng</h1>
 
             <div class="view-cart-container">
                 <table class="table">
@@ -24,10 +25,10 @@ $user_id = $_SESSION['user-id'];
                         <tr>
                             <th scope="col">S.Number</th>
                             <th scope="col">Check</th>
-                            <th scope="col">Item name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lướng</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +47,7 @@ $user_id = $_SESSION['user-id'];
                                 <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td><a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>"><button
-                                            class="btn btn-danger">Remove</button></a></td>
+                                            class="btn btn-danger">Xóa</button></a></td>
                             </tr>
                             <?php
                             $quantity_total += $row['quantity'];
@@ -59,22 +60,22 @@ $user_id = $_SESSION['user-id'];
                 <div class="view-cart-summary position-sticky">
                     <table>
                         <tr class="text-center">
-                            <th colspan="2">Order summary:</th>
+                            <th colspan="2">Tóm tắt giỏ hàng</th>
                         </tr>
                         <tr>
-                            <td class="px-3">Total quantity: </td>
+                            <td class="px-3">Tổng số lượng: </td>
                             <?php
                             echo '<td>' . $quantity_total . '</td>';
                             ?>
                         </tr>
                         <tr>
-                            <td class="px-3">Total price: </td>
+                            <td class="px-3">Tổng tiền: </td>
                             <?php
                             echo '<td class="price"><b>&#36;' . number_format($price_total, 0, '', '.') . '</b></td>';
                             ?>
                         </tr>
                         <tr class="text-center border-top mx-3">
-                            <td colspan="2"><a href="order.php" class="btn btn-warning px-5">Checkout</a></td>
+                            <td colspan="2"><a href="checkout.php" class="btn btn-warning px-5">Đến thanh toán</a></td>
                         </tr>
                     </table>
                 </div>

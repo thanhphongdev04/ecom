@@ -17,9 +17,68 @@ $user_id = $_SESSION['user-id'];
         <div class="col-2"></div>
         <div class="col-8">
             <h2 class="text-warning">Chi tiết thanh toán</h2>
-            <div>
-                <div>Quốc gia</div>
-                <input type="text">
+            <div class="container d-flex justify-content-center">
+                <table class="table w-75">
+                    <tr>
+                        <td colspan="3">
+                            <label>Quốc gia</label>
+                            <select name="country" class="form-control">
+                                <option value="">Việt Nam</option>
+                                <option value="">Mỹ</option>
+                                <option value="">Đức</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td colspan="3" class="w-100">
+                            <div class="d-inline-block w-48">
+                                <label>Họ</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="d-inline-block w-50">
+                                <label>Tên</label>
+                                <input type="text" class="form-control" name="" id="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td colspan="3">
+                            <label>
+                                Công ty</label>
+                            <input type=" text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td colspan="3">
+                            <label>
+                                Địa chỉ</label>
+                            <input type="text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td>
+                            <label>
+                                Thành phố</label>
+                            <input type="text" class="form-control">
+                        </td>
+                        <td>
+                            <label>
+                                Trạng thái</label>
+                            <input type="text" class="form-control">
+                        </td>
+                        <td>
+                            <label>Mã bưu chính</label>
+                            <input type="text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td colspan="3">
+                            <label>
+                                Số điện thoại</label>
+                            <input type="text" class="form-control">
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <h2 class="text-warning">Chi tiết đặt hàng</h2>
@@ -78,7 +137,8 @@ $user_id = $_SESSION['user-id'];
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><input type="radio" name="payment-method" id="cash"><label class="mx-2" for="cash">Tiền
+                            <td><input type="radio" checked name="payment-method" id="cash"><label class="mx-2"
+                                    for="cash">Tiền
                                     mặt</label>
                                 <p>Make your payment directly into our bank account. Plese use your Order ID as the
                                     payment reference. Your order won't be shipped until the funds have cleared in your
@@ -97,9 +157,20 @@ $user_id = $_SESSION['user-id'];
             <input type="checkbox" name="payment-method" id="terms"><label class="mx-2" for="terms">Tôi đã đọc và chấp
                 nhận tất cả điều khoản</label>
 
-            <div>
-                <button class="btn btn-warning">Thanh toán</button>
-            </div>
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="business" value="sb-4h51i34013306@business.example.com">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="item_name" value="HoaDon MuaHang">
+
+                <!-- Trị giá của giỏ hàng, vì paypal không hỗ trợ tiền Việt nên phải đổi ra tiền $-->
+
+                <input type="hidden" name="amount" value="<?= $price_total ?>">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="http://localhost/ECom/success.html">
+                <input type="hidden" name="cancel_return" value="http://localhost/ECom/error.html">
+
+                <input class="btn btn-warning" type="submit" name="submit" value="Thanh toán">
+            </form>
         </div>
         <div class="col-2"></div>
     </div>
