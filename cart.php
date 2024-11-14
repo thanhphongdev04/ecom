@@ -74,7 +74,7 @@ $user_id = $_SESSION['user-id'];
                             ?>
                         </tr>
                         <tr class="text-center border-top mx-3">
-                            <td colspan="2"><button class="btn btn-warning px-5">Checkout</button></td>
+                            <td colspan="2"><a href="order.php" class="btn btn-warning px-5">Checkout</a></td>
                         </tr>
                     </table>
                 </div>

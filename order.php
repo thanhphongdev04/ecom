@@ -1,13 +1,13 @@
 <?php session_start();
 include "conn/connect.php";
-include "template/header.php";
-include "template/nav.php";
 
 if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
     header("Location:login.php");
     exit();
 }
 
+include "template/header.php";
+include "template/nav.php";
 $user_id = $_SESSION['user-id'];
 
 ?>
@@ -97,7 +97,9 @@ $user_id = $_SESSION['user-id'];
             <input type="checkbox" name="payment-method" id="terms"><label class="mx-2" for="terms">Tôi đã đọc và chấp
                 nhận tất cả điều khoản</label>
 
-            <button class="btn btn-warning">Thanh toán</button>
+            <div>
+                <button class="btn btn-warning">Thanh toán</button>
+            </div>
         </div>
         <div class="col-2"></div>
     </div>
