@@ -8,6 +8,10 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
 
 $user_id = $_SESSION['user-id'];
 
+//echo "<pre>" . var_dump($_POST) . "</pre>";
+echo $_POST["payment-method"];
+
+
 include "template/header.php";
 include "template/nav.php";
 ?>

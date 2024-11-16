@@ -21,7 +21,7 @@ if (!isset($_POST['products_id'])) {
 
 //date_default_timezone_set('Asia/Ho_Chi_Minh');
 $user_id = $_SESSION['user-id'];
-
+$_SESSION['products_id'] = $_POST['products_id'];
 
 
 
@@ -30,12 +30,12 @@ include "template/nav.php";
 $user_id = $_SESSION['user-id'];
 
 ?>
-
 <div class="container-fluit">
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8 py-4">
-            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+            <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> -->
+            <form action="Test/testRadio.php" method="post">
                 <h2 class="text-warning">Chi tiết thanh toán</h2>
                 <div class="container d-flex justify-content-center">
                     <table class="table w-75">
@@ -311,30 +311,30 @@ $user_id = $_SESSION['user-id'];
                             <td colspan="3">
                                 <label>
                                     Địa chỉ</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="address" required>
                             </td>
                         </tr>
                         <tr scope="row">
                             <td>
                                 <label>
                                     Thành phố</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="city" required>
                             </td>
                             <td>
                                 <label>
                                     Trạng thái</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="status" required>
                             </td>
                             <td>
                                 <label>Mã bưu chính</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="postcode" required>
                             </td>
                         </tr>
                         <tr scope="row">
                             <td colspan="3">
                                 <label>
                                     Số điện thoại</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="phone" required>
                             </td>
                         </tr>
                     </table>
@@ -399,16 +399,17 @@ $user_id = $_SESSION['user-id'];
                     <table class="table p-2">
                         <tbody>
                             <tr class="border-top-0">
-                                <td class="w-50"><input type="radio" checked name="payment-method" id="cash"><label
-                                        class="mx-2" for="cash">Tiền
-                                        mặt</label>
+                                <td class="w-50">
+                                    <input type="radio" checked name="payment-method" id="cash" value="cash">
+                                    <label class="mx-2" for="cash">Tiền mặt</label>
                                     <p>Make your payment directly into our bank account. Plese use your Order ID as the
                                         payment reference. Your order won't be shipped until the funds have cleared in
                                         your
                                         account</p>
                                 </td>
-                                <td><input type="radio" name="payment-method" id="paypol"><label class="mx-2"
-                                        for="paypol">Paypol</label>
+                                <td>
+                                    <input type="radio" name="payment-method" id="paypal" value="paypal">
+                                    <label class="mx-2" for="paypal">Paypol</label>
                                     <p>Pay via PayPal. You can pay with your credit and if you don't have a PayPol
                                         account
                                     </p>
@@ -430,10 +431,9 @@ $user_id = $_SESSION['user-id'];
                 <input type="hidden" name="return" value="http://localhost/ECom/success.html">
                 <input type="hidden" name="cancel_return" value="http://localhost/ECom/error.html">
 
-                <div class="d-flex align-items-center my-3">
-                    <input type="checkbox" name="payment-method" id="terms" required><label class="mx-2" for="terms">Tôi
-                        đã đọc
-                        và chấp nhận tất cả điều khoản</label>
+                <div class="d-flex  my-3">
+                    <input type="checkbox" id="terms" required name="agree">
+                    <label class="mx-2" for="terms">Tôi đã đọc và chấp nhận tất cả điều khoản</label>
                 </div>
 
                 <input class="btn btn-warning" type="submit" name="submit" value="Thanh toán">
