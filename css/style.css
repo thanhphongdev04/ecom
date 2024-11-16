@@ -96,9 +96,16 @@ tr>.hr {
 }
 
 
+input[type=checkbox] {
+    width: 30px;
+    height: 30px;
+    accent-color: var(--warning);
+    cursor: pointer;
+}
 
-
-
+.custom-btn:active {
+    transform: translate(10px, 10px) !important;
+}
 
 /* old css
 .row .product-container {

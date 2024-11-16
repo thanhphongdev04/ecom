@@ -22,24 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script defer>
-        // Lưu vị trí cuộn khi người dùng cuộn
-        window.addEventListener('scroll', () => {
-            localStorage.setItem('scrollPosition', window.scrollY);
-        });
-
-        // Thiết lập lại vị trí cuộn sau khi tải trang
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollPosition = localStorage.getItem('scrollPosition');
-            if (scrollPosition) {
-                window.scrollTo(0, parseInt(scrollPosition, 10));
-                localStorage.removeItem('scrollPosition');
-            }
-        });
-
-
-    </script>
-
+    <script src="../js/feature.js"></script>
 </head>
 
 <header class="d-flex bg-dark align-items-center mb-3 py-3 rounded mx-5">

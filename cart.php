@@ -16,10 +16,19 @@ $user_id = $_SESSION['user-id'];
 <div class="container-fluit">
     <div class="row">
         <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-8 py-4">
+
+            <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
+                <div class="alert alert-danger">
+                    <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
+                </div>
+                <?php
+                $_SESSION['msg'] = "";
+            }
+            ?>
             <h1>Giỏ hàng</h1>
 
-            <div class="view-cart-container">
+            <form action="checkout.php" class="view-cart-container" method="POST">
                 <table class="table">
                     <thead class="bg-warning">
                         <tr>
@@ -27,7 +36,7 @@ $user_id = $_SESSION['user-id'];
                             <th scope="col">Check</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Giá</th>
-                            <th scope="col">Số lướng</th>
+                            <th scope="col">Số lượng</th>
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
@@ -42,12 +51,14 @@ $user_id = $_SESSION['user-id'];
                             ?>
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
-                                <td class="text-center"><input class="form-check-input" type="checkbox"></td>
+                                <td class="text-center"><input class="form-check-input" type="checkbox" name="products_id[]"
+                                        value="<?= $row['id']; ?>"></td>
                                 <td><?php echo $row['title'] ?></td>
                                 <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td><a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>"><button
-                                            class="btn btn-danger">Xóa</button></a></td>
+                                            class="btn btn-danger"><i class="fa-solid fa-trash"></i><span
+                                                class="mx-3">Xóa</span></button></a></td>
                             </tr>
                             <?php
                             $quantity_total += $row['quantity'];
@@ -75,11 +86,12 @@ $user_id = $_SESSION['user-id'];
                             ?>
                         </tr>
                         <tr class="text-center border-top mx-3">
-                            <td colspan="2"><a href="checkout.php" class="btn btn-warning px-5">Đến thanh toán</a></td>
+                            <td colspan="2"><button type="submit" class="btn btn-warning px-5">Đến thanh
+                                    toán</button></td>
                         </tr>
                     </table>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-2"></div>
     </div>
