@@ -6,22 +6,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == "" || !isset($_SESSION['us
     exit();
 }
 
-if (!isset($_POST['products_id'])) {
+if (!isset($_POST['products-id'])) {
     $_SESSION['msg'] = "Bạn cần chọn ít nhất 1 sản phẩm để thanh toán";
     header('location: cart.php');
     exit();
 }
-/*
- * 0: order placed
- * 1: dispatched
- * 2: in progress
- * 3: deliveried
- * -1: cancelled 
- */
 
-//date_default_timezone_set('Asia/Ho_Chi_Minh');
 $user_id = $_SESSION['user-id'];
-$_SESSION['products_id'] = $_POST['products_id'];
+$_SESSION['products-id'] = $_POST['products-id'];
 
 
 
@@ -34,8 +26,7 @@ $user_id = $_SESSION['user-id'];
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8 py-4">
-            <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> -->
-            <form action="Test/testRadio.php" method="post">
+            <form action="payment.php" method="post">
                 <h2 class="text-warning">Chi tiết thanh toán</h2>
                 <div class="container d-flex justify-content-center">
                     <table class="table w-75">
@@ -323,7 +314,7 @@ $user_id = $_SESSION['user-id'];
                             <td>
                                 <label>
                                     Trạng thái</label>
-                                <input type="text" class="form-control" name="status" required>
+                                <input type="text" class="form-control" name="state" required>
                             </td>
                             <td>
                                 <label>Mã bưu chính</label>
@@ -348,14 +339,15 @@ $user_id = $_SESSION['user-id'];
                             <?php
                             $price_total = 0;
                             $quantity_total = 0;
-                            $products_id = implode(", ", $_POST['products_id']);
-                            $sql = "SELECT products.id, products.title, products.price, cart.quantity 
+                            $products_id = implode(", ", $_POST['products-id']);
+                            $sql = "SELECT cart.id, products.id, products.title, products.price, cart.quantity 
                                 FROM cart, products 
                                 WHERE user_id = $user_id AND products.id = cart.product_id AND cart.product_id IN ($products_id)";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
+                                <input type="hidden" name="carts_id[]" value="<?= $row[0] ?>">
                                 <tr>
                                     <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
                                     <td><?php echo $row['title'] ?></td>
@@ -388,7 +380,10 @@ $user_id = $_SESSION['user-id'];
                             </tr>
                             <tr>
                                 <td>Tổng số tiền:</td>
-                                <td class="price">&#36;<?php echo number_format($price_total, 0, '', '.') ?></td>
+                                <td class="price">
+                                    &#36;<?php echo number_format($price_total, 0, '', '.') ?>
+                                    <input type="hidden" name="total-price" value="<?= $price_total ?>">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -418,18 +413,6 @@ $user_id = $_SESSION['user-id'];
                         </tbody>
                     </table>
                 </div>
-
-
-                <input type="hidden" name="business" value="sb-4h51i34013306@business.example.com">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="item_name" value="HoaDon MuaHang">
-
-                <!-- Trị giá của giỏ hàng, vì paypal không hỗ trợ tiền Việt nên phải đổi ra tiền $-->
-
-                <input type="hidden" name="amount" value="<?= $price_total ?>">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="return" value="http://localhost/ECom/success.html">
-                <input type="hidden" name="cancel_return" value="http://localhost/ECom/error.html">
 
                 <div class="d-flex  my-3">
                     <input type="checkbox" id="terms" required name="agree">

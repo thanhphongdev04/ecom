@@ -12,3 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('scrollPosition');
     }
 });
+
+function autoSubmit() {
+    const form = document.getElementById('form-autosubmit');
+    form.submit();
+}
+
+window.onload = autoSubmit;

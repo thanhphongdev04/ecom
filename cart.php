@@ -51,7 +51,7 @@ $user_id = $_SESSION['user-id'];
                             ?>
                             <tr>
                                 <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" name="products_id[]"
+                                <td class="text-center"><input class="form-check-input" type="checkbox" name="products-id[]"
                                         value="<?= $row['id']; ?>"></td>
                                 <td><?php echo $row['title'] ?></td>
                                 <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
