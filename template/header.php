@@ -25,7 +25,19 @@
     <script src="../js/feature.js"></script>
 </head>
 
+
 <header class="d-flex bg-dark align-items-center mb-3 py-3 rounded mx-5">
     <a href="index.php"><img src="./images/bmazon-logo.jpg"></a>
     <h1 class="text-warning highlighted-text-shadow">bmazon</h1>
 </header>
+
+
+<?php
+if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+    ?>
+    <div class="d-flex bg-danger justify-content-center text-light align-items-center mb-3 py-3 rounded mx-5">
+        Đang truy cập quyền admin
+    </div>
+    <?php
+}
+?>

@@ -32,6 +32,15 @@
             <li class="nav-item ml-2">
                 <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
             </li>
+            <?php
+            if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+                ?>
+                <li class="nav-item ml-2">
+                    <a class="nav-link" href=""><i class="fa-solid fa-gears"></i> Sản phẩm</a>
+                </li>
+                <?php
+            }
+            ?>
         </ul>
         <ul class="navbar-nav">
             <?php

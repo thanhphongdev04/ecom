@@ -4,12 +4,18 @@ include("conn/connect.php");
 include("template/header.php");
 include("template/nav.php");
 ?>
-
 <div class="container-fluid">
     <div class="row bg-light">
         <div class="col-1"></div>
         <div class="col-10">
             <?php
+            if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
+                <div class="alert my-2 alert-warning text-center">
+                    <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
+                </div>
+                <?php
+                $_SESSION['msg'] = "";
+            }
             $sql = "SELECT * from products";
             $result = mysqli_query($conn, $sql);
             $count = 0;
@@ -41,9 +47,26 @@ include("template/nav.php");
                             <option value="15">15</option>
                             <option value="20">20</option>
                         </select>
-                        <button type="submit" class="btn btn-warning"><i class="fa-solid fa-cart-plus fa-lg"></i>
-                            Thêm vào giỏ</button>
+                        <button type="submit" class="btn btn-warning" onclick="getConfirm()">
+                            <i class="fa-solid fa-cart-plus fa-lg"></i>
+                            Thêm vào giỏ
+                        </button>
+                        <?php
+                        if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+                            ?>
+                            <div class="my-3">
+                                <a class="btn btn-warning w-25 mr-3" href="modify-product.php?id=<?= $row['id'] ?>">
+                                    <i class="fa-solid fa-pen"></i><span class="ml-1">Sửa đổi</span>
+                                </a>
+                                <a class="btn btn-danger" onclick="return getConfirm('<?= $row['title'] ?>')"
+                                    href="delete-product.php?id=<?= $row['id'] ?>">
+                                    <i class="fa-solid fa-trash"></i><span class="ml-2">Xóa sản phẩm</span></a>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </form>
+
                 </div>
                 <?php
                 $count++;
@@ -58,6 +81,12 @@ include("template/nav.php");
         <div class="col-1"></div>
     </div>
 </div>
+
+<script>
+    function getConfirm(productName) {
+        return confirm('Bạn có chắc muốn xóa sản phẩm\n' + productName);
+    }
+</script>
 
 <?php
 include("template/footer.php");
