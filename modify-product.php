@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 
         $uploadDir = 'images/';
-
+        $fileTmpPath = $_FILES['file']['tmp_name'];
         $fileName = $_FILES['file']['name'];
 
         $destination = $uploadDir . $fileName;
@@ -54,6 +54,7 @@ include("template/header.php");
 include("template/nav.php");
 ?>
 <form action="" method="POST" class="container my-5" enctype="multipart/form-data">
+    <h1 class="text-warning">Sửa sản phẩm</h1>
     <label class="my-2">Loại</label>
     <select class="form-control" name="catid">
         <?php
@@ -68,6 +69,7 @@ include("template/nav.php");
     <?php
     $sql = "SELECT * FROM products WHERE id = " . $_GET['id'];
     $res = mysqli_query($conn, $sql);
+    $date_added = "";
     if ($row = mysqli_fetch_assoc($res)) {
         ?>
         <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -86,7 +88,7 @@ include("template/nav.php");
 
         <div class="w-48 d-inline-block">
             <label class="my-2">Ngày thêm</label>
-            <input class="form-control" type="date" name="date_added" value="<?= $row['date_added'] ?>">
+            <input class="form-control" type="date" name="date_added" id="date" value="<?= $row['date_added'] ?>">
         </div>
 
         <div class="w-50 d-inline-block">
@@ -101,6 +103,7 @@ include("template/nav.php");
             </button>
         </div>
         <?php
+        $date_added = $row['date_added'];
     }
     ?>
 </form>
@@ -113,6 +116,12 @@ include("template/nav.php");
             fileName.value = fileInput.files[0].name;
         }
     });
+
+    const datetime = '<?= $date_added ?>';
+
+    const datePart = datetime.split(' ')[0];
+
+    document.getElementById('date').value = datePart;
 </script>
 
 

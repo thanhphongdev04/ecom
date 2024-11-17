@@ -36,7 +36,7 @@
             if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
                 ?>
                 <li class="nav-item ml-2">
-                    <a class="nav-link" href=""><i class="fa-solid fa-gears"></i> Sản phẩm</a>
+                    <a class="nav-link" href="add-product.php"><i class="fa-solid fa-circle-plus"></i> Thêm sản phẩm</a>
                 </li>
                 <?php
             }
