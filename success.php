@@ -30,6 +30,7 @@ $city = $checkout_info['city'];
 $state = $checkout_info['state'];
 $postcode = $checkout_info['postcode'];
 $phone = $checkout_info['phone'];
+$total_price = $checkout_info['total-price'];
 
 //update info of user
 $sql_get_user = "SELECT * FROM usersmeta WHERE user_id = $user_id";
@@ -61,14 +62,31 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 $current = date('Y-m-d H-i-s');
 
 
-$sql_add_order = "INSERT INTO orders(payment_date, order_status, payment_method, cart_id) VALUES";
+$sql_add_orders = "INSERT INTO orders(user_id, payment_date, order_status, payment_method)
+                    VALUES ($user_id, '$current', 0, '$payment_method')";
 
-foreach ($checkout_info['carts_id'] as $id) {
-    $sql_add_order = $sql_add_order . "('$current', 0, '$payment_method', $id),";
+mysqli_query($conn, $sql_add_orders);
+
+$last_order_id = mysqli_insert_id($conn);
+
+$sql_add_order_items = "INSERT INTO orderitems(order_id, product_id, quantity, product_price) VALUES";
+
+$products_id = $checkout_info['products_id'];
+$quantities = $checkout_info['quantities'];
+$price = $checkout_info['price'];
+
+$len = count($products_id);
+for ($i = 0; $i < $len; $i++) {
+    $sql_add_order_items = $sql_add_order_items . "($last_order_id, $products_id[$i], $quantities[$i], $price[$i]),";
 }
 
-$sql_add_order = substr_replace($sql_add_order, ';', -1);
+$sql_add_order_items = substr_replace($sql_add_order_items, ';', -1);
 
-$res = mysqli_query($conn, $sql_add_order);
+mysqli_query($conn, $sql_add_order_items);
+
+echo "<pre>";
+echo $sql_add_order_items . "<br>";
+var_dump($checkout_info);
+echo "</pre>";
 
 header('location: myaccount.php');

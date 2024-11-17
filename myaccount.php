@@ -32,7 +32,7 @@ include "template/nav.php";
             <?php
             $price_total = 0;
             $quantity_total = 0;
-            $sql = 'SELECT products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
+            $sql = 'SELECT orders.id, orders.payment_date, orders.status, orders.payment_method, cart. FROM cart, orders WHERE cart.user_id = ' . $user_id . ' AND cart.id = orders.id';
             $result = mysqli_query($conn, $sql);
 
             while ($row = mysqli_fetch_array($result)) {

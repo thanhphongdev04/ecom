@@ -10,7 +10,7 @@ $_SESSION['checkout-info'] = $_POST;
 ?>
 
 
-<script src="js/features.js" defer></script>
+<!-- <script src="js/features.js" defer></script> -->
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="form-autosubmit">
     <input type="hidden" name="business" value="sb-4h51i34013306@business.example.com">
     <input type="hidden" name="cmd" value="_xclick">

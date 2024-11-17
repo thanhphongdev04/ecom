@@ -340,20 +340,26 @@ $user_id = $_SESSION['user-id'];
                             $price_total = 0;
                             $quantity_total = 0;
                             $products_id = implode(", ", $_POST['products-id']);
-                            $sql = "SELECT cart.id, products.id, products.title, products.price, cart.quantity 
+                            $sql = "SELECT products.id, products.title, products.price, cart.quantity 
                                 FROM cart, products 
                                 WHERE user_id = $user_id AND products.id = cart.product_id AND cart.product_id IN ($products_id)";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
-                                <input type="hidden" name="carts_id[]" value="<?= $row[0] ?>">
                                 <tr>
-                                    <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
+                                    <th class="text-center" scope="row">
+                                        <input type="hidden" name="products_id[]" value="<?= $row['id'] ?>">
+                                        <?php echo $row['id'] ?>
+                                    </th>
                                     <td><?php echo $row['title'] ?></td>
-                                    <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
+                                    <td class="price">
+                                        <input type="hidden" name="price[]" value="<?= $row['price'] ?>">
+                                        &#36;<?php echo number_format($row['price'], 0, '', '.') ?>
+                                    </td>
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td class="price">
+                                        <input type="hidden" name="quantities[]" value="<?= $row['quantity'] ?>">
                                         &#36;<?php echo number_format(($row['price'] * $row['quantity']), 0, '', '.') ?>
                                     </td>
                                 </tr>
