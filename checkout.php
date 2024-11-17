@@ -26,7 +26,7 @@ $user_id = $_SESSION['user-id'];
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8 py-4">
-            <form action="payment.php" method="post">
+            <form action="payment.php" method="post" id="payment-form">
                 <h2 class="text-warning">Chi tiết thanh toán</h2>
                 <div class="container d-flex justify-content-center">
                     <table class="table w-75">
@@ -401,20 +401,21 @@ $user_id = $_SESSION['user-id'];
                         <tbody>
                             <tr class="border-top-0">
                                 <td class="w-50">
-                                    <input type="radio" checked name="payment-method" id="cash" value="cash">
+                                    <input type="radio" checked name="payment-method" id="paypal" value="paypal">
+                                    <label class="mx-2" for="paypal">Paypol</label>
+                                    <p>Pay via PayPal. You can pay with your credit and if you don't have a PayPol
+                                        account
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="radio" name="payment-method" id="cash" value="cash">
                                     <label class="mx-2" for="cash">Tiền mặt</label>
                                     <p>Make your payment directly into our bank account. Plese use your Order ID as the
                                         payment reference. Your order won't be shipped until the funds have cleared in
                                         your
                                         account</p>
                                 </td>
-                                <td>
-                                    <input type="radio" name="payment-method" id="paypal" value="paypal">
-                                    <label class="mx-2" for="paypal">Paypol</label>
-                                    <p>Pay via PayPal. You can pay with your credit and if you don't have a PayPol
-                                        account
-                                    </p>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>
