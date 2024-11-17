@@ -62,13 +62,14 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 $current = date('Y-m-d H-i-s');
 
 
-$sql_add_orders = "INSERT INTO orders(user_id, payment_date, order_status, payment_method)
-                    VALUES ($user_id, '$current', 0, '$payment_method')";
+$sql_add_orders = "INSERT INTO orders(user_id, payment_date, order_status, payment_method, total_price)
+                    VALUES ($user_id, '$current', 0, '$payment_method', $total_price)";
 
 mysqli_query($conn, $sql_add_orders);
 
 $last_order_id = mysqli_insert_id($conn);
 
+//add order items
 $sql_add_order_items = "INSERT INTO orderitems(order_id, product_id, quantity, product_price) VALUES";
 
 $products_id = $checkout_info['products_id'];
@@ -84,9 +85,5 @@ $sql_add_order_items = substr_replace($sql_add_order_items, ';', -1);
 
 mysqli_query($conn, $sql_add_order_items);
 
-echo "<pre>";
-echo $sql_add_order_items . "<br>";
-var_dump($checkout_info);
-echo "</pre>";
 
 header('location: myaccount.php');
