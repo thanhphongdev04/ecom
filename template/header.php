@@ -26,9 +26,9 @@
 </head>
 
 
-<header class="d-flex bg-dark align-items-center mb-3 py-3 rounded mx-5">
+<header class="d-flex bg-darkblue align-items-center mb-3 py-3 rounded mx-5">
     <a href="index.php"><img src="./images/bmazon-logo.jpg"></a>
-    <h1 class="text-warning highlighted-text-shadow">bmazon</h1>
+    <h1 class="text-light highlighted-text-shadow">bmazon</h1>
 </header>
 
 

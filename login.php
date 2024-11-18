@@ -41,9 +41,9 @@ include('template/nav.php');
 </head>
 
 <body>
-    <div class="container d-flex my-3">
-        <div class="w-50 p-5 border border-warning">
-            <h2 class="text-warning mb-3">Đăng nhập</h2>
+    <div class="container d-flex my-5">
+        <div class="w-50 p-5 border border-darkblue">
+            <h2 class="text-warmblue mb-3">Đăng nhập</h2>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger">
                     <strong>Thông báo:</strong> <?php echo $error; ?>
@@ -61,16 +61,17 @@ include('template/nav.php');
                         id="password" required>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-warning">Đăng nhập</button>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
                 </div>
             </form>
         </div>
 
-        <div class="w-50 d-flex flex-column align-items-center justify-content-center bg-warning rounded-end-2">
+        <div
+            class="w-50 d-flex flex-column align-items-center justify-content-center bg-darkblue text-light rounded-end-2">
             <img class="icon" src="images/bmazon-logo.jpg">
             <h4>Chào mừng bạn đến đăng nhập</h4>
             <p>Chưa có tài khoản?</p>
-            <a href="Register.php" class="btn btn-outline-dark">Đăng kí</a>
+            <a href="Register.php" class="btn btn-light">Đăng kí</a>
         </div>
 
     </div>

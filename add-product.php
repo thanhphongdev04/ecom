@@ -53,7 +53,7 @@ if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
 ?>
 
 <form action="" method="POST" class="container my-5" enctype="multipart/form-data">
-    <h1 class="text-warning">Thêm sản phẩm</h1>
+    <h1 class="text-warmblue">Thêm sản phẩm</h1>
     <label class="my-2">Loại</label>
     <select class="form-control" name="catid">
         <?php
@@ -90,7 +90,7 @@ if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
     </div>
 
     <div class="text-center my-3">
-        <button class="btn btn-warning my-2 text-center w-25">
+        <button class="btn btn-primary my-2 text-center w-25">
             <i class="fa-solid fa-square-plus"></i>
             <span class="px-2">Thêm</span>
         </button>

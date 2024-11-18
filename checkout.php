@@ -27,7 +27,7 @@ $user_id = $_SESSION['user-id'];
         <div class="col-2"></div>
         <div class="col-8 py-4">
             <form action="payment.php" method="post" id="payment-form">
-                <h2 class="text-warning">Chi tiết thanh toán</h2>
+                <h2 class="text-warmblue">Chi tiết thanh toán</h2>
                 <div class="container d-flex justify-content-center">
                     <table class="table w-75">
                         <tr>
@@ -331,7 +331,7 @@ $user_id = $_SESSION['user-id'];
                     </table>
                 </div>
 
-                <h2 class="text-warning">Chi tiết đặt hàng</h2>
+                <h2 class="text-warmblue">Chi tiết đặt hàng</h2>
 
                 <div class="view-cart-container">
                     <table class="table">
@@ -372,7 +372,7 @@ $user_id = $_SESSION['user-id'];
                     </table>
                 </div>
 
-                <h2 class="text-warning">Đơn hàng của bạn</h2>
+                <h2 class="text-warmblue">Đơn hàng của bạn</h2>
                 <div class="view-cart-container">
                     <table class="table">
                         <tbody>
@@ -395,7 +395,7 @@ $user_id = $_SESSION['user-id'];
                     </table>
                 </div>
 
-                <h2 class="text-warning">Phương thức thanh toán</h2>
+                <h2 class="text-warmblue">Phương thức thanh toán</h2>
                 <div class="view-cart-container">
                     <table class="table p-2">
                         <tbody>
@@ -421,12 +421,13 @@ $user_id = $_SESSION['user-id'];
                     </table>
                 </div>
 
-                <div class="d-flex  my-3">
+                <div class="d-flex align-item-center justify-content-center my-3">
                     <input type="checkbox" id="terms" required name="agree">
-                    <label class="mx-2" for="terms">Tôi đã đọc và chấp nhận tất cả điều khoản</label>
+                    <span class="mx-2 my-0" for="terms">Tôi đã đọc và chấp nhận tất cả điều khoản</span>
                 </div>
-
-                <input class="btn btn-warning" type="submit" name="submit" value="Thanh toán">
+                <div class="d-flex flex-collumn justify-content-center my-3">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Thanh toán">
+                </div>
             </form>
         </div>
         <div class="col-2"></div>

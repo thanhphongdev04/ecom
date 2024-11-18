@@ -30,7 +30,7 @@ $user_id = $_SESSION['user-id'];
 
             <form action="checkout.php" class="view-cart-container" method="POST">
                 <table class="table">
-                    <thead class="bg-warning">
+                    <thead class="bg-secondary text-light">
                         <tr>
                             <th scope="col">S.Number</th>
                             <th scope="col">Check</th>
@@ -86,7 +86,7 @@ $user_id = $_SESSION['user-id'];
                             ?>
                         </tr>
                         <tr class="text-center border-top mx-3">
-                            <td colspan="2"><button type="submit" class="btn btn-warning px-5">Đến thanh
+                            <td colspan="2"><button type="submit" class="btn btn-primary px-5">Đến thanh
                                     toán</button></td>
                         </tr>
                     </table>

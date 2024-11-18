@@ -47,7 +47,7 @@ include("template/nav.php");
                             <option value="15">15</option>
                             <option value="20">20</option>
                         </select>
-                        <button type="submit" class="btn btn-warning" onclick="getConfirm()">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fa-solid fa-cart-plus fa-lg"></i>
                             Thêm vào giỏ
                         </button>

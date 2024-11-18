@@ -52,9 +52,9 @@ include('template/nav.php');
 </script>
 
 
-<div class="container d-flex my-3">
-    <div class="w-50 p-5 border border-dark">
-        <h1 class="text-warning text-center">Đăng ký</h1>
+<div class="container d-flex my-5">
+    <div class="w-50 p-5 border border-darkblue rounded">
+        <h1 class="text-warmblue text-center">Đăng ký</h1>
         <form action="" method="POST" onsubmit="return validatePassword()">
             <div class="form-group">
                 <label for="username">Tên người dùng:</label>
@@ -84,7 +84,7 @@ include('template/nav.php');
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-warning">Đăng ký</button>
+                <button type="submit" class="btn btn-primary w-25">Đăng ký</button>
             </div>
         </form>
     </div>
@@ -92,7 +92,7 @@ include('template/nav.php');
         <img class="icon" src="images/bmazon-logo.jpg">
         <h4>Chào mừng bạn đến đăng ký</h4>
         <p>Đã có tài khoản?</p>
-        <a href="login.php" class="btn btn-outline-warning">Đăng nhập</a>
+        <a href="login.php" class="btn btn-outline-primary">Đăng nhập</a>
     </div>
 </div>
 

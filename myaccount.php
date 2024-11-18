@@ -41,7 +41,7 @@ include "template/nav.php";
 <div class="container my-4">
     <h1>Chi tiết đơn hàng</h1>
     <table class="table">
-        <thead class="bg-warning">
+        <thead class="bg-secondary text-light">
             <tr>
                 <th scope="col">Mã đơn hàng</th>
                 <th scope="col">Ngày</th>
