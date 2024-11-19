@@ -74,44 +74,42 @@ include "template/nav.php";
             </tr>
         </thead>
         <tbody>
-            <form action="cancelOrders.php" method="GET">
-                <?php
-                $price_total = 0;
-                $quantity_total = 0;
-                $sql = "SELECT * FROM orders WHERE user_id = $user_id";
-                $result = mysqli_query($conn, $sql);
+            <?php
+            $price_total = 0;
+            $quantity_total = 0;
+            $sql = "SELECT * FROM orders WHERE user_id = $user_id";
+            $result = mysqli_query($conn, $sql);
 
-                while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                    <tr>
-                        <th class="text-center" scope="row">
-                            <input type="hidden" name="order_id" value="<?= $row['id'] ?>">
-                            <?php echo $row['id'] ?>
-                        </th>
-                        <td><?= $row['payment_date'] ?></td>
-                        <td><?= getStatus($row['order_status']) ?></td>
-                        <td><?= $row['payment_method'] ?></td>
-                        <td class="price">&#36;<?= number_format($row['total_price'], 0, '', '.') ?></td>
-                        <td>
-                            <button type="button" class="btn btn-primary view-order" data-toggle="modal"
-                                data-target="#detailModal" data-isclick="false"
-                                data-orders="<?= htmlspecialchars(json_encode($orders[$row['id']]), ENT_QUOTES, 'UTF-8') ?>">
-                                <i class="fa-solid fa-eye"></i><span class="mx-3">Xem</span></span>
-                            </button>
-                            <?php
-                            if ($row['payment_method'] != 'paypal') { ?>
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fa-solid fa-xmark"></i><span class="mx-3">Hủy</span>
-                                </button>
-                                <?php
-                            }
-                            ?>
-                        </td>
-                    </tr>
-                    <?php
-                }
+            while ($row = mysqli_fetch_array($result)) {
                 ?>
-            </form>
+                <tr>
+                    <th class="text-center" scope="row">
+                        <input type="hidden" name="order_id" value="<?= $row['id'] ?>">
+                        <?php echo $row['id'] ?>
+                    </th>
+                    <td><?= $row['payment_date'] ?></td>
+                    <td><?= getStatus($row['order_status']) ?></td>
+                    <td><?= $row['payment_method'] ?></td>
+                    <td class="price">&#36;<?= number_format($row['total_price'], 0, '', '.') ?></td>
+                    <td>
+                        <button type="button" class="btn btn-primary view-order" data-toggle="modal"
+                            data-target="#detailModal" data-isclick="false"
+                            data-orders="<?= htmlspecialchars(json_encode($orders[$row['id']]), ENT_QUOTES, 'UTF-8') ?>">
+                            <i class="fa-solid fa-eye"></i><span class="mx-3">Xem</span></span>
+                        </button>
+                        <?php
+                        if ($row['payment_method'] != 'paypal' && $row['order_status'] != -1) { ?>
+                            <a href="cancelOrders.php?order-id=<?= $row['id'] ?>" class="btn btn-danger">
+                                <i class="fa-solid fa-xmark"></i><span class="mx-3">Hủy</span>
+                            </a>
+                            <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
         </tbody>
     </table>
 
