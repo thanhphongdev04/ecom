@@ -128,6 +128,11 @@ input[type=checkbox] {
     border: 2px solid var(--darkblue) !important;
 }
 
+.selected {
+    background-color: lightblue !important;
+    transition: 0.3s;
+}
+
 /* old css
 .row .product-container {
     width: 300px;

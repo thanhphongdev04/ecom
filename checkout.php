@@ -385,7 +385,9 @@ $user_id = $_SESSION['user-id'];
                             <tr>
                                 <td>Tổng số tiền:</td>
                                 <td class="price">
-                                    &#36;<?php echo number_format($price_total, 0, '', '.') ?>
+                                    <strong>
+                                        &#36;<?php echo number_format($price_total, 0, '', '.') ?>
+                                    </strong>
                                     <input type="hidden" name="total-price" value="<?= $price_total ?>">
                                 </td>
                             </tr>
@@ -398,20 +400,28 @@ $user_id = $_SESSION['user-id'];
                     <table class="table p-2">
                         <tbody>
                             <tr class="border-top-0">
-                                <td class="w-50">
-                                    <input type="radio" checked name="payment-method" id="paypal" value="paypal">
-                                    <label class="mx-2" for="paypal">Paypol</label>
-                                    <p>Pay via PayPal. You can pay with your credit and if you don't have a PayPol
-                                        account
-                                    </p>
+                                <td class="w-50 rounded mt-0 selected" id="selection-1">
+                                    <label for="paypal">
+                                        <input type="radio" checked name="payment-method" id="paypal" value="paypal">
+                                        <label class="mx-2" for="paypal">Paypol</label>
+                                        <p>Pay via PayPal. You can pay with your credit and if you
+                                            don't
+                                            have a PayPol
+                                            account
+                                        </p>
+                                    </label>
                                 </td>
-                                <td>
-                                    <input type="radio" name="payment-method" id="cash" value="cash">
-                                    <label class="mx-2" for="cash">Tiền mặt</label>
-                                    <p>Make your payment directly into our bank account. Plese use your Order ID as the
-                                        payment reference. Your order won't be shipped until the funds have cleared in
-                                        your
-                                        account</p>
+                                <td id="selection-2">
+                                    <label for="cash">
+                                        <input type="radio" name="payment-method" id="cash" value="cash">
+                                        <label class="mx-2" for="cash">Tiền mặt</label>
+                                        <p>Make your payment directly into our bank account. Plese use your
+                                            Order ID as the
+                                            payment reference. Your order won't be shipped until the funds have cleared
+                                            in
+                                            your
+                                            account</p>
+                                    </label>
                                 </td>
 
                             </tr>
@@ -431,6 +441,26 @@ $user_id = $_SESSION['user-id'];
         <div class="col-2"></div>
     </div>
 </div>
+
+<script>
+    const cont1 = document.getElementById('selection-1');
+    const cont2 = document.getElementById('selection-2');
+    document.getElementById('paypal').addEventListener('change', (event) => {
+        if (event.target.checked) {
+            cont1.classList.add('selected');
+            cont2.classList.remove('selected');
+        }
+    });
+
+    document.getElementById('cash').addEventListener('change', (event) => {
+        if (event.target.checked) {
+            cont2.classList.add('selected');
+            cont1.classList.remove('selected');
+        }
+    });
+</script>
+
+
 <?php
 include "template/footer.php";
 ?>
