@@ -32,6 +32,11 @@
             <li class="nav-item ml-2">
                 <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
             </li>
+
+            <li class="nav-item ml-2">
+                <a class="nav-link" href="myaccount.php"><i class="fa-solid fa-money-bill"></i> Đơn hàng</a>
+            </li>
+
             <?php
             if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
                 ?>

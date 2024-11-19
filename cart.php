@@ -10,7 +10,6 @@ include "template/header.php";
 include "template/nav.php";
 
 $user_id = $_SESSION['user-id'];
-
 ?>
 
 <div class="container-fluit">
@@ -44,7 +43,7 @@ $user_id = $_SESSION['user-id'];
                         <?php
                         $price_total = 0;
                         $quantity_total = 0;
-                        $sql = 'SELECT products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
+                        $sql = 'SELECT cart.id, products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
                         $result = mysqli_query($conn, $sql);
 
                         while ($row = mysqli_fetch_array($result)) {
@@ -56,9 +55,14 @@ $user_id = $_SESSION['user-id'];
                                 <td><?php echo $row['title'] ?></td>
                                 <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
-                                <td><a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>"><button
-                                            class="btn btn-danger"><i class="fa-solid fa-trash"></i><span
-                                                class="mx-3">Xóa</span></button></a></td>
+                                <td>
+                                    <a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>">
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <span class="mx-3">Xóa</span>
+                                        </button>
+                                    </a>
+                                </td>
                             </tr>
                             <?php
                             $quantity_total += $row['quantity'];

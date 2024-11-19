@@ -71,9 +71,14 @@ include "template/nav.php";
                         <td><?= $row['payment_method'] ?></td>
                         <td class="price">&#36;<?= number_format($row['total_price'], 0, '', '.') ?></td>
                         <td>
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fa-solid fa-xmark"></i><span class="mx-3">Hủy</span>
-                            </button>
+                            <?php
+                            if ($row['payment_method'] != 'paypal') { ?>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-xmark"></i><span class="mx-3">Hủy</span>
+                                </button>
+                                <?php
+                            }
+                            ?>
                         </td>
                     </tr>
                     <?php

@@ -15,8 +15,6 @@ if (!isset($_POST['products-id'])) {
 $user_id = $_SESSION['user-id'];
 $_SESSION['products-id'] = $_POST['products-id'];
 
-
-
 include "template/header.php";
 include "template/nav.php";
 $user_id = $_SESSION['user-id'];

@@ -86,4 +86,8 @@ $sql_add_order_items = substr_replace($sql_add_order_items, ';', -1);
 mysqli_query($conn, $sql_add_order_items);
 
 
+//delete cart
+$sql_delete_cart = "DELETE FROM cart WHERE  user_id = $user_id AND product_id IN (" . implode(',', $products_id) . ")";
+mysqli_query($conn, $sql_delete_cart);
+
 header('location: myaccount.php');

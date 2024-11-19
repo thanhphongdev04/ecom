@@ -6,10 +6,6 @@ if (!isset($_GET['id'])) {
     exit();
 }
 
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 
@@ -26,12 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $catid = $_POST['catid'];
     $title = $_POST['title'];
     $price = $_POST['price'];
-    $description = $_POST['description'];
-    $image = $_POST['name-image'];
-    $date_added = $_POST['date_added'] . ' 00:00:00';
-    $status = $_POST['status'];
+    if ($price > 0) {
+        $description = $_POST['description'];
+        $image = $_POST['name-image'];
+        $date_added = $_POST['date_added'] . ' 00:00:00';
+        $status = $_POST['status'];
 
-    $sql = "UPDATE products SET 
+        $sql = "UPDATE products SET 
             catid = $catid,
             title = '$title',   
             price = $price,
@@ -40,12 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             date_added = '$date_added',
             status = $status
             WHERE id = $id
-    ";
-    mysqli_query($conn, $sql);
-    if ($conn->affected_rows > 0)
-        $_SESSION['msg'] = 'Sửa đổi thành công!';
-    else
-        $_SESSION['msg'] = 'Sửa đổi thất bại!';
+            ";
+        mysqli_query($conn, $sql);
+        if ($conn->affected_rows > 0)
+            $_SESSION['msg'] = 'Sửa đổi thành công!';
+        else
+            $_SESSION['msg'] = 'Sửa đổi thất bại!';
+
+    } else {
+        $_SESSION['msg'] = 'Giá sản phẩm phải lớn hơn 0!';
+    }
     header('location: index.php');
 }
 
@@ -77,7 +78,7 @@ include("template/nav.php");
         <input class="form-control" type="text" name="title" value="<?= $row['title'] ?>">
 
         <label class="my-2">Giá</label>
-        <input class="form-control" type="text" name="price" value="<?= $row['price'] ?>">
+        <input class="form-control" type="text" name="price" value="<?= $row['price'] ?>" min="0" required>
 
         <label class="my-2">Mô tả</label>
         <input class="form-control" type="text" name="description" value="<?= $row['description'] ?>">
@@ -96,10 +97,10 @@ include("template/nav.php");
             <input class="form-control" type="text" name="status" value="<?= $row['status'] ?>">
         </div>
 
-        <div class="text-center my-3">
-            <button class="btn btn-primary my-2 text-center w-25">
-                <i class="fa-solid fa-floppy-disk"></i>
-                <span class="px-2">Lưu</span>
+        <div class="text-center my-3>
+            <button class=" btn btn-primary my-2 text-center w-25">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span class="px-2">Lưu</span>
             </button>
         </div>
         <?php
@@ -107,6 +108,30 @@ include("template/nav.php");
     }
     ?>
 </form>
+<button type="button" id="btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Giá sản phẩm phải lớn hơn 0
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.getElementById('file').addEventListener('change', function (event) {
         const fileInput = event.target;
@@ -122,6 +147,11 @@ include("template/nav.php");
     const datePart = datetime.split(' ')[0];
 
     document.getElementById('date').value = datePart;
+
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', function () {
+        btn.click();
+    });
 </script>
 
 
