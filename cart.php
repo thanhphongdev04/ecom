@@ -58,8 +58,8 @@ $user_id = $_SESSION['user-id'];
                                 ?>
                                 <tr>
                                     <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
-                                    <td class="text-center"><input class="form-check-input" type="checkbox" name="products-id[]"
-                                            value="<?= $row['id']; ?>"></td>
+                                    <td class="text-center"><input class="form-check-input checkBox" type="checkbox"
+                                            onclick="updateCheckAll()" name="products-id[]" value="<?= $row['id']; ?>"></td>
                                     <td><?php echo $row['title'] ?></td>
                                     <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
@@ -78,6 +78,15 @@ $user_id = $_SESSION['user-id'];
                             }
                         }
                         ?>
+                        <tr>
+                            <td></td>
+                            <td colspan="5">
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" id="checkAll" onclick="checkAllBoxes()">
+                                    <span class="mx-3">Chọn tất cả</span>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -109,6 +118,31 @@ $user_id = $_SESSION['user-id'];
         <div class="col-2"></div>
     </div>
 </div>
+<script>
+    function checkAllBoxes() {
+        const checkAll = document.getElementById('checkAll').checked;
+
+        var checkboxes = document.querySelectorAll('.checkBox');
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = checkAll;
+        });
+    }
+
+    function updateCheckAll() {
+        // Lấy tất cả checkbox có class "checkBox"
+        const checkboxes = document.querySelectorAll('.checkBox');
+        const checkAll = document.getElementById('checkAll');
+
+        // Kiểm tra xem tất cả checkbox đã được chọn chưa
+        const allChecked = Array.from(checkboxes).every(function (checkbox) {
+            return checkbox.checked;
+        });
+
+        // Nếu tất cả checkbox được chọn, đánh dấu checkbox "Chọn tất cả"
+        checkAll.checked = allChecked;
+    }
+</script>
 <?php
 include "template/footer.php";
 ?>
