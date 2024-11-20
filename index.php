@@ -8,75 +8,56 @@ include("template/nav.php");
     <div class="row bg-light">
         <div class="col-1"></div>
         <div class="col-10">
-            <?php
-            if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
-                <div class="alert my-2 alert-warning text-center">
-                    <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
-                </div>
+            <div class="row d-flex justify-content-around">
                 <?php
-                $_SESSION['msg'] = "";
-            }
-            $sql = "SELECT * from products";
-            $result = mysqli_query($conn, $sql);
-            $count = 0;
-            while ($row = mysqli_fetch_array($result)) {
-                if ($count == 0) {
-                    echo '<div class="row d-flex justify-content-around">'; // Mở hàng mới
+                if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
+                    <div class="alert my-2 alert-warning text-center">
+                        <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
+                    </div>
+                    <?php
+                    $_SESSION['msg'] = "";
+                }
+                $sql = "SELECT * from products";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <div class="product-container">
+                        <div class="thumbnail">
+                            <img src="images/<?php echo $row['image'] ?>" alt="Lỗi ảnh...">
+                        </div>
+                        <div class="info">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <h5 class="title"><?php echo $row['title'] ?></h5>
+                            <p><?php echo $row['description'] ?></p>
+                            <h3 class="price"><b>&#36;<?php echo number_format($row['price']) ?></b></h3>
+                        </div>
+                        <form action="addToCart.php" method="GET">
+                            <input type="number" class="form-control w-50" name="quantity" value="1" min="1" />
+                            <div class="action-buttons">
+                                <button type="submit" class="btn btn-primary add">
+                                    <i class="fa-solid fa-cart-plus fa-lg"></i>
+                                </button>
+                                <?php
+                                if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+                                    ?>
+                                    <a class="btn btn-warning mx-2 p-3" href="modify-product.php?id=<?= $row['id'] ?>">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a class="btn btn-danger p-3" onclick="return getConfirm('<?= $row['title'] ?>')"
+                                        href="delete-product.php?id=<?= $row['id'] ?>">
+                                        <i class="fa-solid fa-trash"></i></a>
+                                    <?php
+                                }
+                                ?>
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <?php
                 }
                 ?>
-                <div class="product-container">
-                    <div class="thumbnail">
-                        <img src="images/<?php echo $row['image'] ?>" alt="Lỗi ảnh...">
-                    </div>
-                    <form class="info" action="addToCart.php" method="GET">
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                        <h5 class="title"><?php echo $row['title'] ?></h5>
-                        <p class=""><?php echo $row['description'] ?></p>
-                        <p class="price"><b>&#36;<?php echo number_format($row['price']) ?></b></p>
-                        <select class="custom-select w-25 mr-3" name="quantity">
-                            <option selected value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa-solid fa-cart-plus fa-lg"></i>
-                            Thêm vào giỏ
-                        </button>
-                        <?php
-                        if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
-                            ?>
-                            <div class="my-3">
-                                <a class="btn btn-warning w-25 mr-3" href="modify-product.php?id=<?= $row['id'] ?>">
-                                    <i class="fa-solid fa-pen"></i><span class="ml-1">Sửa đổi</span>
-                                </a>
-                                <a class="btn btn-danger" onclick="return getConfirm('<?= $row['title'] ?>')"
-                                    href="delete-product.php?id=<?= $row['id'] ?>">
-                                    <i class="fa-solid fa-trash"></i><span class="ml-2">Xóa sản phẩm</span></a>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                    </form>
-
-                </div>
-                <?php
-                $count++;
-
-                if ($count == 2) {
-                    echo '</div>';
-                    $count = 0;
-                }
-            }
-            ?>
+            </div>
         </div>
         <div class="col-1"></div>
     </div>

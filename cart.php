@@ -46,27 +46,36 @@ $user_id = $_SESSION['user-id'];
                         $sql = 'SELECT cart.id, products.id, products.title, products.price, cart.quantity FROM cart, products WHERE user_id = ' . $user_id . ' AND products.id = cart.product_id';
                         $result = mysqli_query($conn, $sql);
 
-                        while ($row = mysqli_fetch_array($result)) {
+                        if ($result->num_rows <= 0) {
                             ?>
-                            <tr>
-                                <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" name="products-id[]"
-                                        value="<?= $row['id']; ?>"></td>
-                                <td><?php echo $row['title'] ?></td>
-                                <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
-                                <td><?php echo $row['quantity'] ?></td>
-                                <td>
-                                    <a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>">
-                                        <button type="button" class="btn btn-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                            <span class="mx-3">Xóa</span>
-                                        </button>
-                                    </a>
-                                </td>
-                            </tr>
+                            <td colspan="6" class="text-center text-warmblue">
+                                <h4>Không có sản phẩm nào</h4>
+                            </td>
                             <?php
-                            $quantity_total += $row['quantity'];
-                            $price_total += $row['price'] * $row['quantity'];
+                        } else {
+
+                            while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <tr>
+                                    <th class="text-center" scope="row"><?php echo $row['id'] ?></th>
+                                    <td class="text-center"><input class="form-check-input" type="checkbox" name="products-id[]"
+                                            value="<?= $row['id']; ?>"></td>
+                                    <td><?php echo $row['title'] ?></td>
+                                    <td class="price">&#36;<?php echo number_format($row['price'], 0, '', '.') ?></td>
+                                    <td><?php echo $row['quantity'] ?></td>
+                                    <td>
+                                        <a href="removeFromCart.php?product-id=<?php echo $row['id'] ?>">
+                                            <button type="button" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                                <span class="mx-3">Xóa</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                                $quantity_total += $row['quantity'];
+                                $price_total += $row['price'] * $row['quantity'];
+                            }
                         }
                         ?>
                     </tbody>

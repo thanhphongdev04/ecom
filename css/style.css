@@ -15,43 +15,56 @@
     --warmblue: #3662e3;
 }
 
-/* new css */
 .product-container {
-    display: flex;
+    display: grid;
     margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "image title"
+        "image actions";
+    row-gap: 5px;
+    padding: 15px;
     width: 45%;
     height: 300px;
-    padding: 15px;
     border-radius: 5px;
     box-shadow: 3px 3px 5px lightgray;
     border: 2px solid var(--darkblue);
 }
 
-.product-container:hover {
-    transform: scale(0.99);
-    transition: .3s;
-    box-shadow: none;
+.product-container>.thumbnail {
+    grid-area: image;
+    width: 90%;
+    height: 100%;
+    margin-right: 10px;
 }
 
 .product-container>.thumbnail>img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
 }
 
 .product-container>.info {
-    margin-left: 15px;
-    flex-grow: 1;
-    /* Chiếm hết phần còn lại của chiều ngang */
+    grid-area: title;
 }
 
-.product-container>.info>.title:hover {
-    display: inline-block;
-    cursor: pointer;
-    color: var(--warmblue);
-    transition: .5s;
+.product-container>form {
+    grid-area: actions;
+    margin: 0;
+    position: relative;
 }
+
+.action-buttons {
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 
 .price {
     color: var(--warmblue);
@@ -131,6 +144,23 @@ input[type=checkbox] {
 .selected {
     background-color: lightblue !important;
     transition: 0.3s;
+}
+
+.top-left {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.bottom-right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+.add {
+    width: 48px;
+    height: 50px;
 }
 
 /* old css

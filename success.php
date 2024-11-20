@@ -37,21 +37,24 @@ $sql_get_user = "SELECT * FROM usersmeta WHERE user_id = $user_id";
 $res = mysqli_query($conn, $sql_get_user);
 if ($res && $res->num_rows > 0) {
     $sql_update_usermeta = "UPDATE usersmeta SET
-    country = $country,
-    first_name = $first_name,
-    last_name = $last_name,
-    company = $company,
-    address = $address,
-    city = $city,
-    state = $state,
-    postcode = $postcode,
-    phone = $phone
+    country = '$country',
+    first_name = '$first_name',
+    last_name = '$last_name',
+    company = '$company',
+    address = '$address',
+    city = '$city',
+    state = '$state',
+    postcode = '$postcode',
+    phone = '$phone'
     WHERE user_id = $user_id";
 
     mysqli_query($conn, $sql_update_usermeta);
 } else {
     $sql_insert_usersmeat = "INSERT INTO usersmeta(user_id, country, first_name, last_name, company, address, city, state, postcode, phone)
     VALUES ($user_id, '$country', '$first_name', '$last_name', '$company', '$address', '$city', '$state', '$postcode', '$phone')";
+
+
+    echo $sql_insert_usersmeat;
 
     mysqli_query($conn, $sql_insert_usersmeat);
 }
