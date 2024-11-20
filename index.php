@@ -26,12 +26,12 @@ include("template/nav.php");
                             <img src="images/<?php echo $row['image'] ?>" alt="Lỗi ảnh...">
                         </div>
                         <div class="info">
-                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <h5 class="title"><?php echo $row['title'] ?></h5>
                             <p><?php echo $row['description'] ?></p>
                             <h3 class="price"><b>&#36;<?php echo number_format($row['price']) ?></b></h3>
                         </div>
                         <form action="addToCart.php" method="GET">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <input type="number" class="form-control w-50" name="quantity" value="1" min="1" />
                             <div class="action-buttons">
                                 <button type="submit" class="btn btn-primary add">
@@ -49,9 +49,7 @@ include("template/nav.php");
                                     <?php
                                 }
                                 ?>
-
                             </div>
-
                         </form>
                     </div>
                     <?php
