@@ -73,7 +73,7 @@ if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
     <input class="form-control" type="number" name="price" required min="0">
 
     <label class="my-2">Mô tả</label>
-    <input class="form-control" type="text" name="description" required>
+    <textarea class="form-control" name="description" required></textarea>
 
     <label class="my-2">Hình ảnh</label>
     <input class="form-control p-1" type="file" name="file" id="file">

@@ -81,7 +81,7 @@ include("template/nav.php");
         <input class="form-control" type="number" name="price" value="<?= $row['price'] ?>" min="0" required>
 
         <label class="my-2">Mô tả</label>
-        <input class="form-control" type="text" name="description" value="<?= $row['description'] ?>">
+        <textarea class="form-control" name="description" value="<?= $row['description'] ?>"></textarea>
 
         <label class="my-2">Hình ảnh</label>
         <input class="form-control p-1" type="file" name="file" id="file">
