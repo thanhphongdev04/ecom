@@ -1,5 +1,12 @@
-<nav class="navbar navbar-expand-lg bg-darkblue navbar-dark rounded mx-5 sticky-top">
-
+<nav class="navbar navbar-expand-lg bg-darkblue text-danger navbar-dark rounded mx-5 sticky-top">
+    <?php
+    if ($isAdmin) {
+        ?>
+        <button class="btn btn-danger mr-3"><i class="fa-solid fa-key"></i> <span class="mx-2">Quyền truy cập Admin</span>
+        </button>
+        <?php
+    }
+    ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +45,7 @@
             </li>
 
             <?php
-            if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+            if ($isAdmin) {
                 ?>
                 <li class="nav-item ml-2">
                     <a class="nav-link" href="add-product.php"><i class="fa-solid fa-circle-plus"></i> Thêm sản phẩm</a>
@@ -52,7 +59,7 @@
             if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
                 ?>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="profile.php"><i
+                    <a class="nav-link <?= $isAdmin ? " text-danger" : "" ?>" href="profile.php"><i
                             class="fa-solid fa-user mr-2"></i><?php echo $_SESSION['user'] ?></a>
                 </li>
                 <li class="nav-item mr-2">

@@ -42,7 +42,7 @@ include("template/nav.php");
                                 </div>
                                 <div class="mt-3 action-buttons">
                                     <?php
-                                    if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+                                    if ($isAdmin) {
                                         ?>
                                         <a class="btn btn-warning p-3" href="modify-product.php?id=<?= $row['id'] ?>">
                                             <i class="fa-solid fa-pen"></i>

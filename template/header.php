@@ -33,11 +33,8 @@
 
 
 <?php
+$isAdmin = false;
 if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
-    ?>
-    <div class="d-flex bg-danger justify-content-center text-light align-items-center mb-3 py-3 rounded mx-5">
-        Đang truy cập quyền admin
-    </div>
-    <?php
+    $isAdmin = true;
 }
 ?>
