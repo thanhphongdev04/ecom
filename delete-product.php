@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
     mysqli_query($conn, $sql);
     if ($conn->affected_rows > 0)
-        $_SESSION['msg'] = 'Xóa thành công!';
+        $_SESSION['msg'] = 'Đã xóa thành công!';
     else
         $_SESSION['msg'] = 'Xóa thất bại!';
 } else {
