@@ -4,7 +4,7 @@ include "conn/connect.php";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql_product_in_cart = "SELECT * FROM cart WHERE product_id = $id";
+    $sql_product_in_cart = "SELECT * FROM orderitems WHERE product_id = $id";
     $res = mysqli_query($conn, $sql_product_in_cart);
     if ($res->num_rows > 0) {
         $_SESSION['msg'] = 'Sản phẩm đã được người dùng đặt hàng, không thể xóa!';

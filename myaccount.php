@@ -26,9 +26,7 @@ function getStatus($status_num)
         case 2:
             return "Đang xử lý";
         case 3:
-            return "Đã đặt hàng";
-        case 4:
-            return "Đã giao hàng";
+            return "Đã nhận hàng";
         case -1:
             return "Đã hủy";
     }
@@ -66,6 +64,13 @@ include "template/nav.php";
         <thead class="bg-secondary text-light">
             <tr>
                 <th scope="col">Mã đơn hàng</th>
+                <?php
+                if ($isAdmin) {
+                    ?>
+                    <th>User id</th>
+                    <?php
+                }
+                ?>
                 <th scope="col">Ngày</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">Phương thức thanh toán</th>
@@ -77,7 +82,10 @@ include "template/nav.php";
             <?php
             $price_total = 0;
             $quantity_total = 0;
-            $sql = "SELECT * FROM orders WHERE user_id = $user_id";
+            if ($isAdmin)
+                $sql = "SELECT * FROM orders";
+            else
+                $sql = "SELECT * FROM orders WHERE user_id = $user_id";
             $result = mysqli_query($conn, $sql);
 
             while ($row = mysqli_fetch_array($result)) {
@@ -87,6 +95,11 @@ include "template/nav.php";
                         <input type="hidden" name="order_id" value="<?= $row['id'] ?>">
                         <?php echo $row['id'] ?>
                     </th>
+                    <?php
+                    if ($isAdmin) {
+                        echo "<td>" . $row['user_id'] . "</td>";
+                    }
+                    ?>
                     <td><?= $row['payment_date'] ?></td>
                     <td><?= getStatus($row['order_status']) ?></td>
                     <td><?= $row['payment_method'] ?></td>
@@ -98,7 +111,7 @@ include "template/nav.php";
                             <i class="fa-solid fa-eye"></i><span class="mx-3">Xem</span></span>
                         </button>
                         <?php
-                        if ($row['payment_method'] != 'paypal' && $row['order_status'] != -1) { ?>
+                        if ($row['payment_method'] != 'paypal' && $row['order_status'] != -1 && $row['order_status'] != 3) { ?>
                             <a href="cancelOrders.php?order-id=<?= $row['id'] ?>" class="btn btn-danger">
                                 <i class="fa-solid fa-xmark"></i><span class="mx-3">Hủy</span>
                             </a>
@@ -113,7 +126,6 @@ include "template/nav.php";
         </tbody>
     </table>
 
-    <!-- <p>abc, ấp Sao Hỏa, huyện Mặt Trời, tỉnh MilkyWay, Galaxy</p> -->
     <h1>Địa chỉ</h1>
     <?php
     $sql = "SELECT * FROM usersmeta WHERE user_id = $user_id";
@@ -128,13 +140,13 @@ include "template/nav.php";
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detailModalLabel">Chi tiết</h5>
+                <h5 class="modal-title text-info" id="detailModalLabel">Chi tiết</h5>
                 <button type="button" class="btn-close btn bg-darkblue text-light" data-dismiss="modal"
                     aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <table class="table" id="product_table">
-                    <tr>
+                    <tr style="background-color: lightblue;">
                         <th>Mã SP</th>
                         <th>Tên SP</th>
                         <th>Số lượng</th>
@@ -168,8 +180,8 @@ include "template/nav.php";
         });
     });
 
-    // Sự kiện khi người dùng nhấn nút đóng (nút "X" hoặc nút "Đóng")
-    $('.btn-close, .btn-secondary').on('click', function () {
+    // Sự kiện khi người dùng nhấn nút đóng (tắt modal)
+    $('#detailModal').on('hide.bs.modal', function (e) {
         $('.product-row').remove();
     });
 

@@ -36,6 +36,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
         $stmt->bind_param("iii", $user_id, $product_id, $quantity);
         $stmt->execute();
     }
+    $_SESSION['msg'] = 'Thêm thành công!';
     header('location: index.php?status=success');
     $stmt->close();
 } else {

@@ -4,7 +4,8 @@ include("conn/connect.php");
 include("template/header.php");
 include("template/nav.php");
 if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
-    <div class="w-100 alert my-2 alert-warning text-center">
+    <div class="w-100 alert my-2 bg-success text-light text-center">
+        <i class="fa-solid fa-circle-check"></i>
         <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
     </div>
     <?php
@@ -38,7 +39,7 @@ if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
                                     <i class="fa-solid fa-cart-plus fa-lg"></i>
                                 </button>
                                 <?php
-                                if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+                                if ($isAdmin) {
                                     ?>
                                     <a class="btn btn-warning mx-2 p-3" href="modify-product.php?id=<?= $row['id'] ?>">
                                         <i class="fa-solid fa-pen"></i>

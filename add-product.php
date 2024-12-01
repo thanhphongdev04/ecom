@@ -44,7 +44,8 @@ include("template/nav.php");
 
 
 if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
-    <div class="alert my-2 alert-warning text-center">
+    <div class="alert my-2 bg-success text-light text-center">
+        <i class="fa-solid fa-circle-check"></i>
         <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
     </div>
     <?php

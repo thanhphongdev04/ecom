@@ -39,15 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             WHERE id = $id
             ";
         mysqli_query($conn, $sql);
-        if ($conn->affected_rows > 0)
+        if ($conn->affected_rows >= 0)
             $_SESSION['msg'] = 'Đã sửa đổi thành công!';
         else
             $_SESSION['msg'] = 'Sửa đổi thất bại!';
+        header('location: index.php');
+        exit();
 
     } else {
         $_SESSION['msg'] = 'Giá sản phẩm phải lớn hơn 0!';
     }
-    header('location: index.php');
+
 }
 
 
@@ -81,7 +83,7 @@ include("template/nav.php");
         <input class="form-control" type="number" name="price" value="<?= $row['price'] ?>" min="0" required>
 
         <label class="my-2">Mô tả</label>
-        <textarea class="form-control" name="description" value="<?= $row['description'] ?>"></textarea>
+        <textarea class="form-control" name="description"><?= $row['description'] ?></textarea>
 
         <label class="my-2">Hình ảnh</label>
         <input class="form-control p-1" type="file" name="file" id="file">

@@ -18,7 +18,8 @@ $user_id = $_SESSION['user-id'];
         <div class="col-8 py-4">
 
             <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") { ?>
-                <div class="alert alert-danger">
+                <div class="alert bg-danger text-light text-center">
+                    <i class="fa-solid fa-circle-xmark"></i>
                     <strong>Thông báo:</strong> <?php echo $_SESSION['msg']; ?>
                 </div>
                 <?php

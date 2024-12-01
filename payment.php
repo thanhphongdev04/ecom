@@ -11,13 +11,11 @@ if ($_POST['payment-method'] == 'cash') {
     header('location: success.php');
 } else {
     ?>
-
-
     <script src="js/features.js" defer></script>
     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="form-autosubmit">
         <input type="hidden" name="business" value="sb-4h51i34013306@business.example.com">
         <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="item_name" value="HoaDon MuaHang">
+        <input type="hidden" name="item_name" value="HoaDon MuaHang">   
 
         <!-- Trị giá của giỏ hàng, vì paypal không hỗ trợ tiền Việt nên phải đổi ra tiền $-->
 

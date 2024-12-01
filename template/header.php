@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navbar.css">
 
-    <!-- icons --><!-- 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
+    <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,7 +32,7 @@
 
 <?php
 $isAdmin = false;
-if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin') {
+if (isset($_SESSION['type']) && $_SESSION['type'] == 'admin') {
     $isAdmin = true;
 }
 ?>
